@@ -1,4 +1,5 @@
 ﻿using System.Reactive.Disposables;
+using System.Security.Policy;
 using System.Windows;
 using Prism.Mvvm;
 using Reactive.Bindings;
@@ -30,6 +31,12 @@ namespace PracticeViewModels.Calc
         /// <summary>計算開始</summary>
         public AsyncReactiveCommand CommandExecute { get; set; } = new AsyncReactiveCommand();
 
+        public ReactiveCollection<string> UnitPriceList { get; set; } = new ReactiveCollection<string>()
+        {
+            "0",
+            "1"
+        };
+
         #endregion
 
         #endregion
@@ -53,7 +60,7 @@ namespace PracticeViewModels.Calc
             // asyncに警告を出さないためのおまじない
             await Task.Delay(0);
 
-            this.TotalPrice.Value = 10000.ToString();
+            this.Calc();
         }
 
         #endregion
@@ -77,8 +84,17 @@ namespace PracticeViewModels.Calc
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
             // 合計金額計算ユースケースを呼び出す
+            this.TotalPrice.Value = (unitPrice * amount * ((100-discountRate) / 100.0)).ToString();
+
+            this.UnitPriceList.Add((this.UnitPriceList.Count + 1).ToString());
+
+            if(this.UnitPriceList.Count > 5)
+            {
+                this.UnitPriceList.Clear();
+                this.UnitPriceList.AddRangeOnScheduler(new string[] { "0", "1" });
+            }
         }
 
         private int GetPrice()
@@ -115,12 +131,12 @@ namespace PracticeViewModels.Calc
         {
             if (!int.TryParse(this.DiscountRate.Value, out var value))
             {
-                throw new ArgumentException("割引率には数値を設定してください");
+                throw new ArgumentException("割引率には0~100を入力してください");
             }
 
-            if (value <= 0)
+            if (value < 0 || value > 100.0)
             {
-                throw new ArgumentException("個数は0より大きい数値を設定してください");
+                throw new ArgumentException("割引率には0~100を入力してください");
             }
 
             return value;
