@@ -1,5 +1,4 @@
 ﻿using System.Reactive.Disposables;
-using System.Security.Policy;
 using System.Windows;
 using Prism.Mvvm;
 using Reactive.Bindings;
@@ -76,25 +75,25 @@ namespace PracticeViewModels.Calc
                 amount = this.GetAmount();
                 discountRate = this.GetDiscountRate();
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
             // 合計金額計算ユースケースを呼び出す
-            this.TotalPrice.Value = (unitPrice * amount * ((100-discountRate) / 100.0)).ToString();
+            this.TotalPrice.Value = (unitPrice * amount * ((100 - discountRate) / 100.0)).ToString();
         }
 
         /// <summary>単価を数値として取得する</summary>
         /// <exception cref="ArgumentException"></exception>
         private int GetPrice()
         {
-            if(!int.TryParse(this.UnitPrice.Value, out var value))
+            if (!int.TryParse(this.UnitPrice.Value, out var value))
             {
                 throw new ArgumentException("単価は0より大きい数値を設定してください");
             }
 
-            if(value <= 0)
+            if (value <= 0)
             {
                 throw new ArgumentException("単価は0より大きい数値を設定してください");
             }

@@ -12,7 +12,7 @@ namespace Practice
     {
         protected override Window CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+            return this.Container.Resolve<MainWindow>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
