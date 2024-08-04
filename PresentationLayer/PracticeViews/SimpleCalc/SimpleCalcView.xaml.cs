@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace PracticeViews.SimpleCalcView
+namespace PracticeViews.SimpleCalc
 {
     /// <summary>
     /// SimpleCalcView.xaml の相互作用ロジック
