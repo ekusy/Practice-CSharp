@@ -18,9 +18,11 @@ namespace PracticeViewModels.Calc
         /// <summary>単価</summary>
         public ReactivePropertySlim<string> UnitPrice { get; set; } = new ReactivePropertySlim<string>("1000");
         /// <summary>数量</summary>
-        public ReactivePropertySlim<string> Piece { get; set; } = new ReactivePropertySlim<string>("10");
+        public ReactivePropertySlim<string> Amount { get; set; } = new ReactivePropertySlim<string>("10");
         /// <summary>割引率</summary>
         public ReactivePropertySlim<string> DiscountRate { get; set; } = new ReactivePropertySlim<string>("0");
+        /// <summary>合計金額</summary>
+        public ReactivePropertySlim<string> TotalPrice { get; set; } = new ReactivePropertySlim<string>("0");
         /// <summary>実行中かどうか</summary>
         public ReactivePropertySlim<bool> IsWorking { get; set; } = new ReactivePropertySlim<bool>();
 
@@ -54,11 +56,6 @@ namespace PracticeViewModels.Calc
         #endregion
 
         #region 非公開メソッド
-
-        private async Task Calc()
-        {
-            
-        }
 
         #endregion
 
