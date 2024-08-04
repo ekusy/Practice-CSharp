@@ -31,12 +31,6 @@ namespace PracticeViewModels.Calc
         /// <summary>計算開始</summary>
         public AsyncReactiveCommand CommandExecute { get; set; } = new AsyncReactiveCommand();
 
-        public ReactiveCollection<string> UnitPriceList { get; set; } = new ReactiveCollection<string>()
-        {
-            "0",
-            "1"
-        };
-
         #endregion
 
         #endregion
@@ -67,7 +61,7 @@ namespace PracticeViewModels.Calc
 
         #region 非公開メソッド
 
-        private void Calc()
+        protected virtual void Calc()
         {
             // 入力パラメータを集める
             var unitPrice = 0;
@@ -87,14 +81,6 @@ namespace PracticeViewModels.Calc
 
             // 合計金額計算ユースケースを呼び出す
             this.TotalPrice.Value = (unitPrice * amount * ((100-discountRate) / 100.0)).ToString();
-
-            this.UnitPriceList.Add((this.UnitPriceList.Count + 1).ToString());
-
-            if(this.UnitPriceList.Count > 5)
-            {
-                this.UnitPriceList.Clear();
-                this.UnitPriceList.AddRangeOnScheduler(new string[] { "0", "1" });
-            }
         }
 
         private int GetPrice()

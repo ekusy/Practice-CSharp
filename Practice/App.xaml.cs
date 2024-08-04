@@ -19,7 +19,7 @@ namespace Practice
         {
             base.ConfigureViewModelLocator();
             ViewModelLocationProvider.Register<PracticeViews.SimpleCalc.SimpleCalcView, PracticeViewModels.Calc.CalcViewModel>();
-            ViewModelLocationProvider.Register<PracticeViews.DropDownCalc.DropDownCalcView, PracticeViewModels.Calc.CalcViewModel>();
+            ViewModelLocationProvider.Register<PracticeViews.DropDownCalc.DropDownCalcView, PracticeViewModels.Calc.DropDownCalcViewModel>();
         }
     }
 
