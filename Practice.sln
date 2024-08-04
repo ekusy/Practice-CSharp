@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationLayer", "Presen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeViews", "PresentationLayer\PracticeViews\PracticeViews.csproj", "{13E6BEF0-86D6-4D91-A58E-014FE7D55D85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeViewModels", "PresentationLayer\PracticeViewModels\PracticeViewModels.csproj", "{6ECA2119-C5A9-4CA3-BF84-90158A0BC755}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{13E6BEF0-86D6-4D91-A58E-014FE7D55D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13E6BEF0-86D6-4D91-A58E-014FE7D55D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13E6BEF0-86D6-4D91-A58E-014FE7D55D85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ECA2119-C5A9-4CA3-BF84-90158A0BC755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ECA2119-C5A9-4CA3-BF84-90158A0BC755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ECA2119-C5A9-4CA3-BF84-90158A0BC755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ECA2119-C5A9-4CA3-BF84-90158A0BC755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{13E6BEF0-86D6-4D91-A58E-014FE7D55D85} = {C234F6E8-A7BB-48E5-B509-E0D596BC6E56}
+		{6ECA2119-C5A9-4CA3-BF84-90158A0BC755} = {C234F6E8-A7BB-48E5-B509-E0D596BC6E56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F84D377-E083-4102-A58A-54B0C6994B24}
