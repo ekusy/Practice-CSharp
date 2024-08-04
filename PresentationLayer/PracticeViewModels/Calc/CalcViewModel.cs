@@ -25,7 +25,7 @@ namespace PracticeViewModels.Calc
         /// <summary>合計金額</summary>
         public ReactivePropertySlim<string> TotalPrice { get; set; } = new ReactivePropertySlim<string>("0");
         /// <summary>実行中かどうか</summary>
-        public ReactivePropertySlim<bool> IsWorking { get; set; } = new ReactivePropertySlim<bool>();
+        public ReactivePropertySlim<bool> IsIdle { get; set; } = new ReactivePropertySlim<bool>(true);
 
         /// <summary>計算開始</summary>
         public AsyncReactiveCommand CommandExecute { get; set; } = new AsyncReactiveCommand();
@@ -52,6 +52,8 @@ namespace PracticeViewModels.Calc
         {
             // asyncに警告を出さないためのおまじない
             await Task.Delay(0);
+
+            this.TotalPrice.Value = 10000.ToString();
         }
 
         #endregion
