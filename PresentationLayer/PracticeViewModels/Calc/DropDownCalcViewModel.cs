@@ -21,6 +21,7 @@ namespace PracticeViewModels.Calc
 
         }
 
+        /// <inheritdoc/>
         protected override void Calc()
         {
             base.Calc();

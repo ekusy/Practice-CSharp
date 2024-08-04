@@ -61,6 +61,7 @@ namespace PracticeViewModels.Calc
 
         #region 非公開メソッド
 
+        /// <summary>計算して結果を格納する</summary>
         protected virtual void Calc()
         {
             // 入力パラメータを集める
@@ -83,6 +84,8 @@ namespace PracticeViewModels.Calc
             this.TotalPrice.Value = (unitPrice * amount * ((100-discountRate) / 100.0)).ToString();
         }
 
+        /// <summary>単価を数値として取得する</summary>
+        /// <exception cref="ArgumentException"></exception>
         private int GetPrice()
         {
             if(!int.TryParse(this.UnitPrice.Value, out var value))
@@ -98,6 +101,10 @@ namespace PracticeViewModels.Calc
             return value;
         }
 
+
+
+        /// <summary>個数を数値として取得する</summary>
+        /// <exception cref="ArgumentException"></exception>
         private int GetAmount()
         {
             if (!int.TryParse(this.Amount.Value, out var value))
@@ -113,6 +120,10 @@ namespace PracticeViewModels.Calc
             return value;
         }
 
+
+
+        /// <summary>割引率を数値として取得する</summary>
+        /// <exception cref="ArgumentException"></exception>
         private double GetDiscountRate()
         {
             if (!int.TryParse(this.DiscountRate.Value, out var value))
