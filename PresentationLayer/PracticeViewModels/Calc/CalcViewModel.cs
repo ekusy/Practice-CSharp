@@ -49,6 +49,7 @@ namespace PracticeViewModels.Calc
 
         #region コールバック
 
+        /// <summary>計算ボタン押下時のコールバック</summary>
         private async Task OnCommandExecute()
         {
             // asyncに警告を出さないためのおまじない
