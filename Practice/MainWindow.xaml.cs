@@ -9,7 +9,7 @@ namespace Practice
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿<UserControl
-    x:Class="PracticeViews.SimpleCalc.SimpleCalcView"
+    x:Class="PracticeViews.DropDownCalc.DropDownCalcView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:PracticeViews.SimpleCalc"
+    xmlns:local="clr-namespace:PracticeViews.DropDownCalc"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     d:DesignHeight="200"
@@ -39,23 +39,26 @@
                 Grid.Column="0"
                 Margin="5"
                 Text="単価" />
-            <TextBox
+            <ComboBox
+                Name="UnitPriceComboBox"
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="5"
                 IsEnabled="{Binding IsIdle.Value}"
-                Text="{Binding UnitPrice.Value}" />
+                ItemsSource="{Binding UnitPriceList}"
+                SelectedItem="{Binding UnitPrice.Value}" />
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="5"
                 Text="個数" />
-            <TextBox
+            <ComboBox
+                Name="AmountComboBox"
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="5"
                 IsEnabled="{Binding IsIdle.Value}"
-                Text="{Binding Amount.Value}" />
+                SelectedItem="{Binding Amount.Value}" />
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="2"
@@ -90,3 +93,4 @@
         <!--#endregion-->
     </Grid>
 </UserControl>
+
