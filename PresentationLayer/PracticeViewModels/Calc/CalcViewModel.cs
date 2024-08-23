@@ -8,6 +8,26 @@ namespace PracticeViewModels.Calc
 {
     public class CalcViewModel : BindableBase, IDisposable
     {
+        #region インナークラス
+        public class Record
+        {
+            public int UnitPrice { get; private set; }
+            public int Amount { get; private set; }
+            public double DiscountRate { get; private set; }
+            public bool ReducedTaxRateFlag { get; private set; }
+            public int TotalPrice { get; private set; }
+
+            public Record(int unitPrice, int amount, double discountRate, bool reducedTaxRateFlag, int totalPrice)
+            {
+                this.UnitPrice = unitPrice;
+                this.Amount = amount;
+                this.DiscountRate = discountRate;
+                this.ReducedTaxRateFlag = reducedTaxRateFlag;
+                this.TotalPrice = totalPrice;
+            }
+        }
+
+        #endregion
         #region フィールド・プロパティ
 
         #region 定数
@@ -24,6 +44,10 @@ namespace PracticeViewModels.Calc
         public ReactivePropertySlim<string> DiscountRate { get; set; } = new ReactivePropertySlim<string>("0");
         /// <summary>合計金額</summary>
         public ReactivePropertySlim<string> TotalPrice { get; set; } = new ReactivePropertySlim<string>("0");
+        public ReactivePropertySlim<bool> ReducedTaxRateFlag { get; set; } = new ReactivePropertySlim<bool>();
+
+        public ReactiveCollection<Record> Records { get; set; } = [];
+
         /// <summary>実行中かどうか</summary>
         public ReactivePropertySlim<bool> IsIdle { get; set; } = new ReactivePropertySlim<bool>(true);
 
@@ -68,6 +92,7 @@ namespace PracticeViewModels.Calc
             var unitPrice = 0;
             var amount = 0;
             var discountRate = 0.0;
+            var taxRate = this.ReducedTaxRateFlag.Value ? 1.08 : 1.1;
 
             try
             {
@@ -80,8 +105,24 @@ namespace PracticeViewModels.Calc
                 MessageBox.Show(ex.Message);
             }
 
-            // 合計金額計算ユースケースを呼び出す
-            this.TotalPrice.Value = (unitPrice * amount * ((100 - discountRate) / 100.0)).ToString();
+            // 合計金額を計算して
+            var totalPrice = CalcTotalPrice(unitPrice, amount, discountRate, taxRate);
+
+            // 合計部分に表示して
+            this.TotalPrice.Value = totalPrice.ToString();
+
+            // ログに追加して
+            this.AddLogRecord(new Record(unitPrice, amount, discountRate, this.ReducedTaxRateFlag.Value, totalPrice));
+        }
+
+        private static int CalcTotalPrice(int unitPrice,int amount,double discountRate, double taxRate)
+        {
+            return (int)Math.Round((unitPrice * amount * ((100 - discountRate) / 100.0) * taxRate),0);
+        }
+
+        private void AddLogRecord(Record record)
+        {
+            this.Records.AddOnScheduler(record);
         }
 
         /// <summary>単価を数値として取得する</summary>
@@ -100,8 +141,6 @@ namespace PracticeViewModels.Calc
 
             return value;
         }
-
-
 
         /// <summary>個数を数値として取得する</summary>
         /// <exception cref="ArgumentException"></exception>
