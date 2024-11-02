@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Unity;
@@ -23,7 +21,7 @@ namespace Calculator
             base.ConfigureViewModelLocator();
 
             // ViewとViewModelの紐づけを明示的に行う
-            ViewModelLocationProvider.Register<CalculatorViews.CalculatorView,CalculatorViewModels.CalculatorViewModel>();
+            ViewModelLocationProvider.Register<CalculatorViews.CalculatorView, CalculatorViewModels.CalculatorViewModel>();
         }
     }
 

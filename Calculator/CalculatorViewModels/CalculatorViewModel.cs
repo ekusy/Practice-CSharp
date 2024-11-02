@@ -1,4 +1,3 @@
-using System;
 using System.Windows;
 using Prism.Mvvm;
 using Reactive.Bindings;
@@ -95,7 +94,7 @@ namespace CalculatorViewModels
             // すでに計算記号が存在している場合は何もしない(数字2つの計算を前提)
             if (MathDefine.MathSymbols.Any(m => this.Display.Value.Contains(m)))
             {
-                MessageBox.Show("まだ数字2つの計算しかできません","いつか実装する",MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show("まだ数字2つの計算しかできません", "いつか実装する", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
