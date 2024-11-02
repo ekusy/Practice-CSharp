@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CalculatorView
+namespace CalculatorViews
 {
     /// <summary>
-    /// CaluculatorView.xaml の相互作用ロジック
+    /// CalculatorView.xaml の相互作用ロジック
     /// </summary>
-    public partial class CaluculatorView : UserControl
+    public partial class CalculatorView : UserControl
     {
-        public CaluculatorView()
+        public CalculatorView()
         {
             InitializeComponent();
         }

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalculatorView\CalculatorView.csproj" />
+    <ProjectReference Include="..\CalculatorViews\CalculatorViews.csproj" />
   </ItemGroup>
 
 </Project>
