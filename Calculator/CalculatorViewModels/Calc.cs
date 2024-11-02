@@ -8,6 +8,11 @@ namespace CalculatorViewModels
 {
 	public class Calc
 	{
+		/// <summary>
+		/// 計算
+		/// </summary>
+		/// <param name="model">計算機ビューモデル</param>
+		/// <returns>計算結果</returns>
 		public static string Calculation(CalculatorViewModel model)
 		{
 			string formula = model.Result.Value;

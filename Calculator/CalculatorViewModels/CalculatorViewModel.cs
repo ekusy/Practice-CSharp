@@ -15,7 +15,7 @@ namespace CalculatorViewModels
         public ReactiveCommand CommandButtonSymbol { get; set; } = new ReactiveCommand();
         public ReactiveCommand CommandButtonEqual { get; set; } = new ReactiveCommand();
         public ReactiveCommand CommandButtonClear { get; set; } = new ReactiveCommand();
-        private bool isReset { get; set; }
+        private bool isReset;
         #endregion
 
         #region コンストラクタ
@@ -30,6 +30,11 @@ namespace CalculatorViewModels
         #endregion
 
         #region privateメソッド
+        
+        /// <summary>
+        /// 数値ボタンをクリックイベント
+        /// </summary>
+        /// <param name="value"></param>
         private void OnCommandButtonNumber(object? value)
         {
             if (this.isReset)
@@ -40,6 +45,11 @@ namespace CalculatorViewModels
             if (this.Result.Value == "0") this.Result.Value = value.ToString();
             else this.Result.Value += value.ToString();
         }
+
+        /// <summary>
+        /// 記号ボタンをクリックイベント
+        /// </summary>
+        /// <param name="value"></param>
         private void OnCommandButtonSymbol(object? value)
         {
             isReset = false;
@@ -50,18 +60,30 @@ namespace CalculatorViewModels
 			} 
             this.Result.Value += value.ToString();
         }
+
+        /// <summary>
+        /// =ボタンをクリックイベント
+        /// </summary>
         private void OnCommandButtonEqual()
         {
             string formula = this.Result.Value;
             this.Result.Value = Calc.Calculation(this);
             this.isReset = true;
         }
+
+        /// <summary>
+        /// クリアボタンをクリックイベント
+        /// </summary>
         private void OnCommandButtonClear()
         {
             ClearResult();
             this.isReset = false;
 
 		}
+
+        /// <summary>
+        /// 結果クリア
+        /// </summary>
         private void ClearResult()
         {
             this.Result.Value = "0";
