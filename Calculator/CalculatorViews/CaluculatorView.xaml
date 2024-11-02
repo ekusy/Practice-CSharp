@@ -213,6 +213,7 @@
                 Style="{StaticResource BorderBase}">
                 <Button
                     Name="ButtonEqual"
+                    Command="{Binding CommandButtonEqual}"
                     Content="="
                     Style="{StaticResource ButtonPrimary}" />
             </Border>
