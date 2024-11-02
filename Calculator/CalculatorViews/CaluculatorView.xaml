@@ -24,6 +24,20 @@
             <Setter Property="Background" Value="Blue" />
             <Setter Property="Foreground" Value="White" />
         </Style>
+        <Style
+            x:Key="ButtonNum"
+            BasedOn="{StaticResource ButtonBase}"
+            TargetType="Button">
+            <Setter Property="Command" Value="{Binding CommandButtonNum}" />
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+        </Style>
+        <Style
+            x:Key="ButtonMathSymbol"
+            BasedOn="{StaticResource ButtonBase}"
+            TargetType="Button">
+            <Setter Property="Command" Value="{Binding CommandButtonMathSymbol}" />
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+        </Style>
         <Style x:Key="BorderBase" TargetType="Border">
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="BorderBrush" Value="LightGray" />
@@ -67,7 +81,7 @@
                     Grid.Row="1"
                     Grid.RowSpan="2"
                     Style="{StaticResource TextDisplay}"
-                    Text="1+2" />
+                    Text="{Binding Display.Value}" />
             </Grid>
             <!--#endregion-->
 
@@ -79,7 +93,7 @@
                 <Button
                     Name="Button7"
                     Content="7"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -88,7 +102,7 @@
                 <Button
                     Name="Button8"
                     Content="8"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -97,7 +111,7 @@
                 <Button
                     Name="Button9"
                     Content="9"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -106,7 +120,7 @@
                 <Button
                     Name="ButtonDiv"
                     Content="÷"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonMathSymbol}" />
             </Border>
             <!--#endregion-->
 
@@ -118,7 +132,7 @@
                 <Button
                     Name="Button4"
                     Content="4"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -127,7 +141,7 @@
                 <Button
                     Name="Button5"
                     Content="5"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -136,7 +150,7 @@
                 <Button
                     Name="Button6"
                     Content="6"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -145,7 +159,7 @@
                 <Button
                     Name="ButtonMul"
                     Content="×"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonMathSymbol}" />
             </Border>
             <!--#endregion-->
 
@@ -157,7 +171,7 @@
                 <Button
                     Name="Button1"
                     Content="1"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="3"
@@ -166,7 +180,7 @@
                 <Button
                     Name="Button2"
                     Content="2"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="3"
@@ -175,7 +189,7 @@
                 <Button
                     Name="Button3"
                     Content="3"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="3"
@@ -184,7 +198,7 @@
                 <Button
                     Name="ButtonSub"
                     Content="-"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonMathSymbol}" />
             </Border>
             <!--#endregion-->
 
@@ -196,7 +210,7 @@
                 <Button
                     Name="Button0"
                     Content="0"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="4"
@@ -205,7 +219,7 @@
                 <Button
                     Name="Button00"
                     Content="00"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNum}" />
             </Border>
             <Border
                 Grid.Row="4"
@@ -224,7 +238,7 @@
                 <Button
                     Name="ButtonAdd"
                     Content="+"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonMathSymbol}" />
             </Border>
             <!--#endregion-->
         </Grid>
