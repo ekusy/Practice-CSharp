@@ -52,6 +52,7 @@ namespace CalculatorViewModels
 
         private void OnCommandButtonNum(object param)
         {
+            // 多分入ってくることはないが、一応不正なパラメータの場合は何もさせない
             if ((param is not string num))
             {
                 return;
@@ -66,6 +67,7 @@ namespace CalculatorViewModels
                 this.isReset = false;
             }
 
+            // 初期状態の0が入っている場合は上書きさせる
             if (displayText.Equals("0"))
             {
                 this.Display.Value = num;
@@ -83,16 +85,17 @@ namespace CalculatorViewModels
                 return;
             }
 
+            // char型で扱いたいので変換する
             var mathSymbol = mathSymbolStr.ToCharArray().FirstOrDefault();
 
             // 対象外の計算記号の場合は何もしない
-            if (!MathDefine.MathSymbols.Contains(mathSymbol))
+            if (!MathDefine.mathSymbols.Contains(mathSymbol))
             {
                 return;
             }
 
             // すでに計算記号が存在している場合は何もしない(数字2つの計算を前提)
-            if (MathDefine.MathSymbols.Any(m => this.Display.Value.Contains(m)))
+            if (MathDefine.mathSymbols.Any(m => this.Display.Value.Contains(m)))
             {
                 MessageBox.Show("まだ数字2つの計算しかできません", "いつか実装する", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -103,9 +106,9 @@ namespace CalculatorViewModels
 
             var displayText = this.Display.Value;
             // 計算記号が重ならないように、末尾が計算記号の場合は上書きする
-            if (MathDefine.MathSymbols.Contains(displayText.Last()))
+            if (MathDefine.mathSymbols.Contains(displayText.Last()))
             {
-                displayText = displayText.TrimEnd(MathDefine.MathSymbols) + mathSymbol;
+                displayText = displayText.TrimEnd(MathDefine.mathSymbols) + mathSymbol;
                 this.Display.Value = displayText;
                 return;
             }
@@ -124,7 +127,7 @@ namespace CalculatorViewModels
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.disposables.Clear();
         }
         #endregion
     }

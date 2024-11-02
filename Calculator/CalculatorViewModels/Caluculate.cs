@@ -13,7 +13,7 @@ namespace CalculatorViewModels
             CheckFomula(formula);
 
             // 計算式の中に存在する記号を抽出する
-            var mathSymbol = MathDefine.MathSymbols.Where(formula.Contains).FirstOrDefault();
+            var mathSymbol = MathDefine.mathSymbols.Where(formula.Contains).FirstOrDefault();
 
             switch (mathSymbol)
             {
@@ -26,7 +26,7 @@ namespace CalculatorViewModels
                 case MathDefine.div:
                     return Div(formula);
                 default:
-                    throw new ArgumentNullException($"{formula}は不正な式です");
+                    throw new ArgumentException($"{formula}は不正な式です");
             }
 
         }
@@ -35,22 +35,22 @@ namespace CalculatorViewModels
         {
             if (string.IsNullOrEmpty(formula))
             {
-                throw new ArgumentNullException($"式が空白です");
+                throw new ArgumentException($"式が空白です");
             }
 
-            if (!MathDefine.MathSymbols.Any(formula.Contains))
+            if (!MathDefine.mathSymbols.Any(formula.Contains))
             {
-                throw new ArgumentNullException($"計算記号が無い式は不正です");
+                throw new ArgumentException($"計算記号が無い式は不正です");
             }
 
-            if (1 < MathDefine.MathSymbols.Where(formula.Contains).Count())
+            if (1 < MathDefine.mathSymbols.Where(formula.Contains).Count())
             {
-                throw new ArgumentNullException($"計算記号が複数存在する式は不正です");
+                throw new ArgumentException($"計算記号が複数存在する式は不正です");
             }
 
             if (!regFormula.IsMatch(formula))
             {
-                throw new ArgumentNullException($"{formula}は不正な式です");
+                throw new ArgumentException($"{formula}は不正な式です");
             }
         }
 
