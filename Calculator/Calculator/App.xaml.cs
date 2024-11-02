@@ -19,7 +19,11 @@ namespace Calculator
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            ;
+
+            base.ConfigureViewModelLocator();
+
+            // ViewとViewModelの紐づけを明示的に行う
+            ViewModelLocationProvider.Register<CalculatorViews.CalculatorView,CalculatorViewModels.CalculatorViewModel>();
         }
     }
 
