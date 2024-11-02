@@ -12,6 +12,8 @@ namespace CalculatorViewModels
         #region フィールド・プロパティ
         private readonly CompositeDisposable disposables = new CompositeDisposable();
 
+        private bool isReset = false;
+
         public ReactivePropertySlim<string> Display { get; set; } = new ReactivePropertySlim<string>("0");
         public ReactivePropertySlim<string> Test { get; set; } = new ReactivePropertySlim<string>("電卓アプリ");
 
@@ -39,6 +41,9 @@ namespace CalculatorViewModels
             try
             {
                 this.Display.Value = Caluculate.Execute(this.Display.Value);
+
+                // 計算後に数値を入力したら入力欄をリセットさせる
+                this.isReset = true;
             }
             catch (ArgumentException ex)
             {
@@ -53,7 +58,16 @@ namespace CalculatorViewModels
                 return;
             }
 
-            if (this.Display.Value.Equals("0"))
+            var displayText = this.Display.Value;
+
+            // 新規の入力が確定したら初期化フラグを落とす
+            if (this.isReset)
+            {
+                displayText = "0";
+                this.isReset = false;
+            }
+
+            if (displayText.Equals("0"))
             {
                 this.Display.Value = num;
                 return;
@@ -85,6 +99,9 @@ namespace CalculatorViewModels
                 return;
             }
 
+            // 新規の入力が確定したら初期化フラグを落とす
+            this.isReset = false;
+
             var displayText = this.Display.Value;
             // 計算記号が重ならないように、末尾が計算記号の場合は上書きする
             if (MathDefine.MathSymbols.Contains(displayText.Last()))
@@ -100,6 +117,9 @@ namespace CalculatorViewModels
 
         private void OnCommandButtonClear()
         {
+            // クリア時は常に初期化フラグを落とす
+            this.isReset = false;
+
             this.Display.Value = "0";
         }
 
