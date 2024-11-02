@@ -20,6 +20,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="AUto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--#region 入力欄-->
@@ -29,10 +30,11 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Row="0"
@@ -43,6 +45,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="5"
+                VerticalAlignment="Center"
                 IsEnabled="{Binding IsIdle.Value}"
                 Text="{Binding UnitPrice.Value}" />
             <TextBlock
@@ -54,6 +57,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="5"
+                VerticalAlignment="Center"
                 IsEnabled="{Binding IsIdle.Value}"
                 Text="{Binding Amount.Value}" />
             <TextBlock
@@ -65,11 +69,24 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 Margin="5"
+                VerticalAlignment="Center"
                 IsEnabled="{Binding IsIdle.Value}"
                 Text="{Binding DiscountRate.Value}" />
-            <Button
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="3"
+                Margin="5"
+                Text="軽減税率適用" />
+            <CheckBox
                 Grid.Row="1"
                 Grid.Column="3"
+                Margin="5"
+                VerticalAlignment="Center"
+                IsChecked="{Binding ReducedTaxRateFlag.Value}"
+                IsEnabled="{Binding IsIdle.Value}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="4"
                 Margin="5"
                 Command="{Binding CommandExecute}"
                 Content="計算"
@@ -86,6 +103,46 @@
                 <TextBlock Text="合計 : " />
                 <TextBlock Text="{Binding TotalPrice.Value}" />
             </StackPanel>
+        </Grid>
+        <!--#endregion-->
+        <!--#region ログ表示部-->
+        <Grid Grid.Row="2">
+            <ListView ItemsSource="{Binding Records}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Empty">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=UnitPrice}" Header="単価" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="個数" />
+                        <GridViewColumn
+                            Width="Auto"
+                            DisplayMemberBinding="{Binding Path=DiscountRate}"
+                            Header="割引率" />
+                        <GridViewColumn
+                            Width="Auto"
+                            DisplayMemberBinding="{Binding Path=ReducedTaxRateFlag}"
+                            Header="軽減税率適用" />
+                        <GridViewColumn
+                            Width="Auto"
+                            DisplayMemberBinding="{Binding Path=TotalPrice}"
+                            Header="合計" />
+                        <GridViewColumn
+                            x:Name="ButtonsControl"
+                            Width="Auto"
+                            Header="削除">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding CommandDeleteRecord}" Content="削除" />
+                                    <!--
+                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType=GridView}, Path=DataContext.CommandDeleteRecord}" Content="削除" />
+                                    -->
+                                    <!--
+                                    <Button Command="{Binding {RelativeSource AncestorType=ListView},{Path=CommandDeleteRecord}}" Content="削除" />
+                                    -->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
         <!--#endregion-->
     </Grid>
