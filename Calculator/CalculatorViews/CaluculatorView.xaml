@@ -217,9 +217,10 @@
                 Grid.Column="1"
                 Style="{StaticResource BorderBase}">
                 <Button
-                    Name="Button00"
-                    Content="00"
-                    Style="{StaticResource ButtonNum}" />
+                    Name="ButtonClear"
+                    Command="{Binding CommandButtonClear}"
+                    Content="C"
+                    Style="{StaticResource ButtonBase}" />
             </Border>
             <Border
                 Grid.Row="4"

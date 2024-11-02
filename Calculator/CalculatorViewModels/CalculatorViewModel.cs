@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using Prism.Mvvm;
 using Reactive.Bindings;
@@ -17,6 +18,7 @@ namespace CalculatorViewModels
         public ReactiveCommand CommandButtonEqual { get; set; } = new ReactiveCommand();
         public ReactiveCommand<string> CommandButtonNum { get; set; } = new ReactiveCommand<string>();
         public ReactiveCommand<string> CommandButtonMathSymbol { get; set; } = new ReactiveCommand<string>();
+        public ReactiveCommand CommandButtonClear { get; set; } = new ReactiveCommand();
 
         #endregion
 
@@ -26,6 +28,7 @@ namespace CalculatorViewModels
             _ = this.CommandButtonEqual.Subscribe(this.OnCommandButtonEqual).AddTo(this.disposables);
             _ = this.CommandButtonNum.Subscribe(this.OnCommandButtonNum).AddTo(this.disposables);
             _ = this.CommandButtonMathSymbol.Subscribe(this.OnCommandButtonMathSymbol).AddTo(this.disposables);
+            _ = this.CommandButtonClear.Subscribe(this.OnCommandButtonClear).AddTo(this.disposables);
         }
 
         #endregion
@@ -92,6 +95,11 @@ namespace CalculatorViewModels
 
             // ññîˆÇ…åvéZãLçÜÇí«â¡Ç∑ÇÈ
             this.Display.Value += mathSymbol;
+        }
+
+        private void OnCommandButtonClear()
+        {
+            this.Display.Value = "0";
         }
 
         public void Dispose()
