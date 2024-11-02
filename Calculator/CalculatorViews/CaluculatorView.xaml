@@ -18,6 +18,20 @@
             <Setter Property="FontSize" Value="48" />
         </Style>
         <Style
+            x:Key="ButtonNumber"
+            BasedOn="{StaticResource ButtonBase}"
+            TargetType="Button">
+            <Setter Property="Command" Value="{Binding CommandButtonNumber}" />
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+        </Style>
+        <Style
+            x:Key="ButtonSymbol"
+            BasedOn="{StaticResource ButtonBase}"
+            TargetType="Button">
+            <Setter Property="Command" Value="{Binding CommandButtonSymbol}" />
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+        </Style>
+        <Style
             x:Key="ButtonPrimary"
             BasedOn="{StaticResource ButtonBase}"
             TargetType="Button">
@@ -67,7 +81,7 @@
                     Grid.Row="1"
                     Grid.RowSpan="2"
                     Style="{StaticResource TextDisplay}"
-                    Text="1+2" />
+                    Text="{Binding Result.Value}" />
             </Grid>
             <!--#endregion-->
 
@@ -79,7 +93,7 @@
                 <Button
                     Name="Button7"
                     Content="7"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -88,7 +102,7 @@
                 <Button
                     Name="Button8"
                     Content="8"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -97,7 +111,7 @@
                 <Button
                     Name="Button9"
                     Content="9"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -106,7 +120,7 @@
                 <Button
                     Name="ButtonDiv"
                     Content="÷"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonSymbol}" />
             </Border>
             <!--#endregion-->
 
@@ -118,7 +132,7 @@
                 <Button
                     Name="Button4"
                     Content="4"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -127,7 +141,7 @@
                 <Button
                     Name="Button5"
                     Content="5"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -136,7 +150,7 @@
                 <Button
                     Name="Button6"
                     Content="6"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -145,7 +159,7 @@
                 <Button
                     Name="ButtonMul"
                     Content="×"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonSymbol}" />
             </Border>
             <!--#endregion-->
 
@@ -157,7 +171,7 @@
                 <Button
                     Name="Button1"
                     Content="1"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="3"
@@ -165,8 +179,10 @@
                 Style="{StaticResource BorderBase}">
                 <Button
                     Name="Button2"
+                    Command="{Binding CommandButtonNumber}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
                     Content="2"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="3"
@@ -175,7 +191,7 @@
                 <Button
                     Name="Button3"
                     Content="3"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="3"
@@ -184,7 +200,7 @@
                 <Button
                     Name="ButtonSub"
                     Content="-"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonSymbol}" />
             </Border>
             <!--#endregion-->
 
@@ -196,15 +212,16 @@
                 <Button
                     Name="Button0"
                     Content="0"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonNumber}" />
             </Border>
             <Border
                 Grid.Row="4"
                 Grid.Column="1"
                 Style="{StaticResource BorderBase}">
                 <Button
-                    Name="Button00"
-                    Content="00"
+                    Name="ButtonClear"
+                    Command="{Binding CommandButtonClear}"
+                    Content="C"
                     Style="{StaticResource ButtonBase}" />
             </Border>
             <Border
@@ -224,7 +241,7 @@
                 <Button
                     Name="ButtonAdd"
                     Content="+"
-                    Style="{StaticResource ButtonBase}" />
+                    Style="{StaticResource ButtonSymbol}" />
             </Border>
             <!--#endregion-->
         </Grid>
