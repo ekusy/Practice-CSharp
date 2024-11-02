@@ -10,7 +10,223 @@
     d:DesignWidth="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="ButtonBase" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="48" />
+        </Style>
+        <Style
+            x:Key="ButtonPrimary"
+            BasedOn="{StaticResource ButtonBase}"
+            TargetType="Button">
+            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style x:Key="BorderBase" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+        </Style>
+        <Style x:Key="TextDisplay" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="FontSize" Value="48" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="{Binding Test.Value}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="9*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding Test.Value}" />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--#region 表示欄-->
+            <Grid Grid.Row="0" Grid.ColumnSpan="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Style="{StaticResource TextDisplay}"
+                    Text="1+2" />
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region 1行目-->
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button7"
+                    Content="7"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button8"
+                    Content="8"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="2"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button9"
+                    Content="9"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="3"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="ButtonDiv"
+                    Content="÷"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 2行目-->
+            <Border
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button4"
+                    Content="4"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button5"
+                    Content="5"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                Grid.Column="2"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button6"
+                    Content="6"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                Grid.Column="3"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="ButtonMul"
+                    Content="×"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 3行目-->
+            <Border
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button1"
+                    Content="1"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button2"
+                    Content="2"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="3"
+                Grid.Column="2"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button3"
+                    Content="3"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="3"
+                Grid.Column="3"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="ButtonSub"
+                    Content="-"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 4行目-->
+            <Border
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button0"
+                    Content="0"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="Button00"
+                    Content="00"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <Border
+                Grid.Row="4"
+                Grid.Column="2"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="ButtonEqual"
+                    Content="="
+                    Style="{StaticResource ButtonPrimary}" />
+            </Border>
+            <Border
+                Grid.Row="4"
+                Grid.Column="3"
+                Style="{StaticResource BorderBase}">
+                <Button
+                    Name="ButtonAdd"
+                    Content="+"
+                    Style="{StaticResource ButtonBase}" />
+            </Border>
+            <!--#endregion-->
+        </Grid>
     </Grid>
 </UserControl>
+
