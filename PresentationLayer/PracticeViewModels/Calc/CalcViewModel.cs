@@ -11,19 +11,23 @@ namespace PracticeViewModels.Calc
         #region インナークラス
         public class Record
         {
+            public Guid Id { get; }
             public int UnitPrice { get; private set; }
             public int Amount { get; private set; }
             public double DiscountRate { get; private set; }
             public bool ReducedTaxRateFlag { get; private set; }
             public int TotalPrice { get; private set; }
+            public ReactiveCommand<Guid> CommandDeleteRecord { get; set; } = new ReactiveCommand<Guid>();
 
-            public Record(int unitPrice, int amount, double discountRate, bool reducedTaxRateFlag, int totalPrice)
+            public Record(int unitPrice, int amount, double discountRate, bool reducedTaxRateFlag, int totalPrice, Action<Guid> CommandDelete)
             {
+                this.Id = Guid.NewGuid();
                 this.UnitPrice = unitPrice;
                 this.Amount = amount;
                 this.DiscountRate = discountRate;
                 this.ReducedTaxRateFlag = reducedTaxRateFlag;
                 this.TotalPrice = totalPrice;
+                this.CommandDeleteRecord.Subscribe(CommandDelete);
             }
         }
 
@@ -112,7 +116,8 @@ namespace PracticeViewModels.Calc
             this.TotalPrice.Value = totalPrice.ToString();
 
             // ログに追加して
-            this.AddLogRecord(new Record(unitPrice, amount, discountRate, this.ReducedTaxRateFlag.Value, totalPrice));
+            var record = new Record(unitPrice, amount, discountRate, this.ReducedTaxRateFlag.Value, totalPrice, this.OnCommandDeleteRecord);
+            this.AddLogRecord(record);
         }
 
         private static int CalcTotalPrice(int unitPrice,int amount,double discountRate, double taxRate)
@@ -123,6 +128,26 @@ namespace PracticeViewModels.Calc
         private void AddLogRecord(Record record)
         {
             this.Records.AddOnScheduler(record);
+        }
+
+        private void OnCommandDeleteRecord(Guid guid)
+        {
+            Record? record =null;
+            for (var i = 0; i < this.Records.Count; i++)
+            {
+                if (this.Records[i].Id == guid)
+                {
+                    record = this.Records[i];
+                    break;
+                }
+            }
+
+            if(record is null)
+            {
+                return;
+            }
+
+            this.Records.RemoveOnScheduler(record);
         }
 
         /// <summary>単価を数値として取得する</summary>

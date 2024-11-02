@@ -124,6 +124,22 @@
                             Width="Auto"
                             DisplayMemberBinding="{Binding Path=TotalPrice}"
                             Header="合計" />
+                        <GridViewColumn
+                            x:Name="ButtonsControl"
+                            Width="Auto"
+                            Header="削除">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding CommandDeleteRecord}" Content="削除" />
+                                    <!--
+                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType=GridView}, Path=DataContext.CommandDeleteRecord}" Content="削除" />
+                                    -->
+                                    <!--
+                                    <Button Command="{Binding {RelativeSource AncestorType=ListView},{Path=CommandDeleteRecord}}" Content="削除" />
+                                    -->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
