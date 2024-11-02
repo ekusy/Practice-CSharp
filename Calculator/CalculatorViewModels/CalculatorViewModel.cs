@@ -1,5 +1,3 @@
-using System;
-using System.Text.RegularExpressions;
 using System.Windows;
 using Prism.Mvvm;
 using Reactive.Bindings;
@@ -8,12 +6,10 @@ using Reactive.Bindings.Extensions;
 
 namespace CalculatorViewModels
 {
-    public class CalculatorViewModel : BindableBase , IDisposable
+    public class CalculatorViewModel : BindableBase, IDisposable
     {
         #region フィールド・プロパティ
         private readonly CompositeDisposable disposables = new CompositeDisposable();
-
-        private static readonly char[] mathSymbols = new char[] { '+', '-', '×', '÷' };
 
         public ReactivePropertySlim<string> Display { get; set; } = new ReactivePropertySlim<string>("0");
         public ReactivePropertySlim<string> Test { get; set; } = new ReactivePropertySlim<string>("電卓アプリ");
@@ -37,8 +33,14 @@ namespace CalculatorViewModels
         #region privateメソッド
         private void OnCommandButtonEqual()
         {
-            //MessageBox.Show("\"=\"が押されました");
-            this.Test.Value = Guid.NewGuid().ToString();
+            try
+            {
+                this.Display.Value = Caluculate.Execute(this.Display.Value);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void OnCommandButtonNum(object param)
@@ -53,7 +55,7 @@ namespace CalculatorViewModels
                 this.Display.Value = num;
                 return;
             }
-            
+
             this.Display.Value += num;
         }
 
@@ -68,23 +70,22 @@ namespace CalculatorViewModels
             var mathSymbol = mathSymbolStr.ToCharArray().FirstOrDefault();
 
             // 対象外の計算記号の場合は何もしない
-            if (!mathSymbols.Contains(mathSymbol))
+            if (!MathDefine.MathSymbols.Contains(mathSymbol))
             {
                 return;
             }
 
             // すでに計算記号が存在している場合は何もしない(数字2つの計算を前提)
-            if(mathSymbols.Any(m => this.Display.Value.Contains(m)))
+            if (MathDefine.MathSymbols.Any(m => this.Display.Value.Contains(m)))
             {
                 return;
             }
 
             var displayText = this.Display.Value;
-
             // 計算記号が重ならないように、末尾が計算記号の場合は上書きする
-            if (mathSymbols.Contains(displayText.Last()))
+            if (MathDefine.MathSymbols.Contains(displayText.Last()))
             {
-                displayText = displayText.TrimEnd(mathSymbols) + mathSymbol;
+                displayText = displayText.TrimEnd(MathDefine.MathSymbols) + mathSymbol;
                 this.Display.Value = displayText;
                 return;
             }
@@ -92,7 +93,6 @@ namespace CalculatorViewModels
             // 末尾に計算記号を追加する
             this.Display.Value += mathSymbol;
         }
-        
 
         public void Dispose()
         {
