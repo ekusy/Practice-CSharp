@@ -106,7 +106,7 @@ namespace CalculatorViewModels
 
             var displayText = this.Display.Value;
             // 計算記号が重ならないように、末尾が計算記号の場合は上書きする
-            if (MathDefine.mathSymbols.Contains(displayText.Last()))
+            if (MathDefine.mathSymbols.Contains(displayText.LastOrDefault()))
             {
                 displayText = displayText.TrimEnd(MathDefine.mathSymbols) + mathSymbol;
                 this.Display.Value = displayText;
