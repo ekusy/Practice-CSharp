@@ -81,6 +81,7 @@ namespace CalculatorViewModels
             // すでに計算記号が存在している場合は何もしない(数字2つの計算を前提)
             if (MathDefine.MathSymbols.Any(m => this.Display.Value.Contains(m)))
             {
+                MessageBox.Show("まだ数字2つの計算しかできません");
                 return;
             }
 
